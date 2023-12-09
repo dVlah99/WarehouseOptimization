@@ -1,37 +1,37 @@
-import {PriorityEnum} from "../Enums/PriorityEnum";
-import {IsString, IsEnum, IsNumber, IsDefined, Max, IsArray, ArrayNotEmpty} from "class-validator";
+/* eslint-disable indent */
+import { PriorityEnum } from '../Enums/PriorityEnum'
+import { IsString, IsEnum, IsNumber, IsArray } from 'class-validator'
 
 interface Iitem {
-    name: string,
-    size: number,
-    value: number,
-    priority: PriorityEnum,
-    dependencies: string[] | []
+  name: string
+  size: number
+  value: number
+  priority: PriorityEnum
+  dependencies: string[] | []
 }
 
 export class Item implements Iitem {
-    @IsString()
-    name: string
+  @IsString()
+  name: string
 
-    @IsNumber()
-    size: number
+  @IsNumber()
+  size: number
 
-    @IsNumber()
-    value: number
+  @IsNumber()
+  value: number
 
-    @IsEnum(PriorityEnum)
-    priority: PriorityEnum
+  @IsEnum(PriorityEnum)
+  priority: PriorityEnum
 
-    @IsArray()
-    @IsString({ each: true, always: undefined })
-    dependencies: string[] = [];
+  @IsArray()
+  @IsString({ each: true, always: undefined })
+  dependencies: string[] = []
 
-   constructor(input: Item) {
-        this.name = input.name;
-        this.size = input.size;
-        this.value = input.value;
-        this.priority = input.priority;
-        this.dependencies = input.dependencies;
-    }
+  constructor(input: Item) {
+    this.name = input.name
+    this.size = input.size
+    this.value = input.value
+    this.priority = input.priority
+    this.dependencies = input.dependencies
+  }
 }
-

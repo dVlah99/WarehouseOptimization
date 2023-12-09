@@ -1,10 +1,10 @@
-import {ValidatorErrorPayload} from "../../Validators/ItemSelectionInputValidator";
+import { ValidatorErrorPayload } from '../../Utils/Validators/ItemSelectionInputValidator'
 
 export class InputValidationError extends Error {
-    payload: ValidatorErrorPayload;
+  payload: ValidatorErrorPayload
 
-    constructor(payload: ValidatorErrorPayload) {
-        super('Input Validation Error');
-        this.payload = payload;
-    }
+  constructor(payload: ValidatorErrorPayload) {
+    super('Input Validation Error')
+    this.payload = payload
+  }
 }

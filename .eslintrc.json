@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "quotes": ["error", "single"],
+    "indent": ["error", 2],
+    "no-implicit-any": "warn",
+    "no-unused-vars": "error",
+    "no-console": "warn",
+    "semi": "off"
+  }
+}
