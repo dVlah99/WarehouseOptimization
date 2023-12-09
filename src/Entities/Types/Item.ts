@@ -1,5 +1,5 @@
 import {PriorityEnum} from "../Enums/PriorityEnum";
-import {IsString, IsEnum, IsNumber, IsDefined, Max} from "class-validator";
+import {IsString, IsEnum, IsNumber, IsDefined, Max, IsArray, ArrayNotEmpty} from "class-validator";
 
 interface Iitem {
     name: string,
@@ -22,8 +22,9 @@ export class Item implements Iitem {
     @IsEnum(PriorityEnum)
     priority: PriorityEnum
 
-    @IsDefined()
-    dependencies: string[] | []
+    @IsArray()
+    @IsString({ each: true, always: undefined })
+    dependencies: string[] = [];
 
    constructor(input: Item) {
         this.name = input.name;
