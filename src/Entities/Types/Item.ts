@@ -2,7 +2,7 @@
 import { PriorityEnum } from '../Enums/PriorityEnum'
 import { IsString, IsEnum, IsNumber, IsArray } from 'class-validator'
 
-interface Iitem {
+interface IItem {
   name: string
   size: number
   value: number
@@ -10,7 +10,7 @@ interface Iitem {
   dependencies: string[] | []
 }
 
-export class Item implements Iitem {
+export class Item implements IItem {
   @IsString()
   name: string
 

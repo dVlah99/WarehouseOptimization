@@ -6,9 +6,10 @@
   "rules": {
     "quotes": ["error", "single"],
     "indent": ["error", 2],
-    "no-implicit-any": "warn",
+    "no-implicit-any": "off",
     "no-unused-vars": "error",
     "no-console": "warn",
-    "semi": "off"
+    "semi": "off",
+    "@typescript-eslint/no-explicit-any": "warn"
   }
 }

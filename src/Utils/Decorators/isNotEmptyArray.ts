@@ -1,11 +1,11 @@
 import { registerDecorator, ValidationArguments, ValidationOptions } from 'class-validator'
-
+//A custom decorator that checks that the array is not empty
 export function IsNotEmptyArray(validationOptions?: ValidationOptions) {
   return function (object: any, propertyName: string) {
     registerDecorator({
       name: 'isNotEmptyArray',
       target: object.constructor,
-      propertyName: propertyName,
+      propertyName,
       options: validationOptions,
       validator: {
         validate(value: any) {

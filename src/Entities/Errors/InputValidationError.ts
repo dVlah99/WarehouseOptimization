@@ -1,5 +1,5 @@
-import { ValidatorErrorPayload } from '../../Utils/Validators/ItemSelectionInputValidator'
-
+import { ValidatorErrorPayload } from '../../Utils/Validators/ClassValidator'
+//Custom error for input validation
 export class InputValidationError extends Error {
   payload: ValidatorErrorPayload
 
