@@ -35,11 +35,18 @@ export class InventorySelectionController implements IInventorySelectionControll
   }
 
   private static async selectItems(items: Item[], totalSpace: number): Promise<InventorySelectorPayload> {
+    //Firstly, I sort and group the items by priority
     const sortedItems = this.sortItems(items)
+    //This array is used to save info about the selected items.
     const selectedItems: Item[] = []
+    //Remaining available space in the warehouse.
+    //Each time an item is added to selectedItems, this number decreases by item size.
     let remainingSpace = totalSpace
+    //Total value of selected items.
     let totalValue = 0
 
+    //The one thing I didn't understand correctly is the way I should consider dependencies
+    //What I mean by that is that I
     for (const item of sortedItems) {
       if (item.size <= remainingSpace) {
         const dependenciesMet = this.checkDependencies(selectedItems, item)
@@ -59,7 +66,7 @@ export class InventorySelectionController implements IInventorySelectionControll
         amountOfSelectedItems: selectedItems.length,
         items: selectedItems,
       },
-      unselectedItems: {
+      notSelectedItems: {
         items: items.filter((item) => !selectedItems.includes(item)),
       },
     }

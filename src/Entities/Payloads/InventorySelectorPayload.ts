@@ -12,7 +12,7 @@ export type InventorySelectorPayload = {
     amountOfSelectedItems: number
     items: Item[]
   }
-  unselectedItems: {
+  notSelectedItems: {
     items: Item[]
   }
 }
