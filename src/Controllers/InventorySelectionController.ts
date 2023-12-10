@@ -83,6 +83,8 @@ export class InventorySelectionController implements IInventorySelectionControll
         })
     }*/
 
+  //I'm going to assume that an item with priority 2 will be dependant only on items of same or higher priority
+  //Because of that, my logic is to group items by priority, and them sort them in a priority group by the number of dependencies
   private static sortItems(items: Item[]): Item[] {
     //Using a map to sort items by priority
     //Each priority is defined as an array of Items
