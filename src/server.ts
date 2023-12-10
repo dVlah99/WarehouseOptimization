@@ -11,7 +11,9 @@ app.use(express.json())
 //Used for env variables
 dotenv.config()
 
-// POST route to receive warehouse data
+//POST route to receive warehouse data. I used post because there are no data changes, and we aren't
+//retrieving any value. We only need info about the optimal way of filling an inventory.
+//validateRequestBody middleware checks that the body from the request is not null, undefined or an empty object.
 app.post('/fill-inventory', validateRequestBody, async (req: Request, res: Response, next: NextFunction) => {
   const input: ItemSelectionInput = req.body
   try {
@@ -22,7 +24,7 @@ app.post('/fill-inventory', validateRequestBody, async (req: Request, res: Respo
   }
 })
 
-//Error handler middleware
+//Error-handling middleware
 app.use(errorHandler)
 
 const PORT = process.env.PORT

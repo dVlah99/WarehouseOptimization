@@ -27,11 +27,11 @@ export class Item implements IItem {
   @IsString({ each: true, always: undefined })
   dependencies: string[] = []
 
-  constructor(input: Item) {
-    this.name = input.name
-    this.size = input.size
-    this.value = input.value
-    this.priority = input.priority
-    this.dependencies = input.dependencies
+  constructor({ dependencies, priority, size, name, value }: Item) {
+    this.name = name
+    this.size = size
+    this.value = value
+    this.priority = priority
+    this.dependencies = dependencies
   }
 }

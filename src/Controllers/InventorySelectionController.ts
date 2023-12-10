@@ -1,7 +1,7 @@
 import { InventorySelectorPayload } from '../Entities/Payloads/InventorySelectorPayload'
 import { ItemSelectionInput } from '../Entities/Input/ItemSelectionInput'
 import { Item } from '../Entities/Types/Item'
-import { ClassValidator, ValidatorErrorPayload } from '../Utils/Validators/ClassValidator'
+import { ClassValidator } from '../Utils/Validators/ClassValidator'
 import { PriorityEnum } from '../Entities/Enums/PriorityEnum'
 import { InputValidationError } from '../Entities/Errors/InputValidationError'
 
@@ -13,14 +13,16 @@ abstract class IInventorySelectionController {
 
 export class InventorySelectionController implements IInventorySelectionController {
   public static async fillInventory(input: ItemSelectionInput): Promise<InventorySelectorPayload> {
-    //Validates items and totalSpace data from input. It will detect nulls, undefined and invalid data types
-    //It return a boolean. True if no errors, false if there are errors.
+    //Checks the input array for null or undefined values. Throws an error if it detects one!
+    ClassValidator.arrayContainsNullOrUndefined(input.items)
+
     const itemSelectionInput = new ItemSelectionInput(input) //We must create an instance of an object to use class validator properly.
-    const userInputValidation = ClassValidator.validateInput(itemSelectionInput)
+
+    //Validates items and totalSpace data from input. It will detect nulls, undefined and invalid data types.
+    //An error is thrown if there is an error in the input.
+    ClassValidator.validateInput(itemSelectionInput)
 
     try {
-      //Checks the return value of InputValidation.validateInput(). If it's false an error is thrown.
-      this.isInputValid(userInputValidation)
       //The main logic for selecting items
       return this.selectItems(input.items, input.totalSpace)
     } catch (error) {
@@ -32,7 +34,7 @@ export class InventorySelectionController implements IInventorySelectionControll
     }
   }
 
-  private static selectItems(items: Item[], totalSpace: number): InventorySelectorPayload {
+  private static async selectItems(items: Item[], totalSpace: number): Promise<InventorySelectorPayload> {
     const sortedItems = this.sortItems(items)
     const selectedItems: Item[] = []
     let remainingSpace = totalSpace
@@ -120,12 +122,5 @@ export class InventorySelectionController implements IInventorySelectionControll
       }
     }
     return true
-  }
-
-  private static isInputValid(value: ValidatorErrorPayload) {
-    if (!value.isValid) {
-      //Custom error for an invalid input
-      throw new InputValidationError(value)
-    }
   }
 }
