@@ -46,7 +46,10 @@ export class InventorySelectionController implements IInventorySelectionControll
     let totalValue = 0
 
     //The one thing I didn't understand correctly is the way I should consider dependencies
-    //What I mean by that is that I
+    //What I mean by that is that should items that are dependent on some item, for example
+    //Large sofa is dependent on Coffee table, should those items come in pair in the selection process?
+    //By that I mean if Coffee table is selected and there is no space for the Large sofa, should I make space
+    //for the large sofa just because those 2 depend on each other? Or I can discard the large sofa in this selection process?
     for (const item of sortedItems) {
       if (item.size <= remainingSpace) {
         const dependenciesMet = this.checkDependencies(selectedItems, item)
